@@ -33,21 +33,21 @@ export class ProjectBudgetService {
     return results;
   }
 
-  async getTotalPaidPerProject(projectId: string): Promise<number> {
+  async getTotalPaidPerProject(projectId: string): Promise<{ status: string; total_amount: number }[]> {
     const db = this.getDb();
     const { results } = await db
       .prepare(`
-        SELECT SUM(be.amount) as total_paid
+        SELECT be.status, SUM(be.amount) as total_amount
         FROM project_budgets pb
         JOIN budget_expenses be ON pb.id = be.budget_id
         WHERE 
           pb.project_id = ?
-          AND be.status = 'paid'
+        GROUP BY be.status
         `)
       .bind(projectId)
-      .all<{ total_paid: number }>();
-    console.log(results);
-    return results[0].total_paid || 0;
+      .all<{ status: string; total_amount: number }>();
+    // console.log(results);
+    return results;
   }
 
   async getBudget(id: string, projectId: string): Promise<ProjectBudget | null> {

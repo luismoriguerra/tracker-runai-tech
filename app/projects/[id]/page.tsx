@@ -38,7 +38,7 @@ export default async function ProjectPage({
 }) {
   const project = await getProject(params.id);
   const budgets = await getBudgets(params.id);
-  const totalPaid = await getTotalPaidPerProject(params.id);
+  const totalsByStatus = await getTotalPaidPerProject(params.id);
   
   if (!project) {
     notFound();
@@ -57,7 +57,7 @@ export default async function ProjectPage({
       <ProjectStats
         expenseEstimation={project.expense_estimation}
         accumulatedBudget={accumulatedBudget}
-        totalPaid={totalPaid}
+        totalsByStatus={totalsByStatus}
       />
 
       <BudgetGrid
