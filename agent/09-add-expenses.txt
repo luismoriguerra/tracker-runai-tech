@@ -1,0 +1,6 @@
+For this change , we are going to follow same implementations for payments (db, service , api and page)
+we are going to add a new table called expenses , it will have the following columns: id , project_id , name , description , amount , expense_date , status , created_at , updated_at , in this case by default it will be status will be paid instead of pending.
+
+1. Create a new d1 migration to add the new expenses table
+2. Create a new app/api/projects/[id]/expenses/route.ts to handle the new expenses 
+3. Create a new app/projects/[id]/expenses/page.tsx to handle the new expenses 

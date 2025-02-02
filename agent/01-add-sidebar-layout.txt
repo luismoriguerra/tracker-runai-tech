@@ -1,0 +1,14 @@
+
+1. Let's add sidebar and global layout
+
+npx shadcn@latest add sidebar-07 --yes
+
+2. Accomodate Global Layout
+
+Move all the layout from app/dashboard/page to app/layout.tsx
+
+5. Update page title and description in app/layout.tsx
+
+6. Install more shadcn components
+npx shadcn@latest add alert-dialog select card --yes
+

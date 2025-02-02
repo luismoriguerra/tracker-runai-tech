@@ -1,0 +1,14 @@
+
+4. Create a CRUD Api for project budgets
+the new API routes should be:
+-  POST /api/projects/[id]/budgets/route.ts
+-  GET /api/projects/[id]/budgets/route.ts
+-  PUT /api/projects/[id]/budgets/[budget_id]/route.ts
+-  DELETE /api/projects/[id]/budgets/[budget_id]/route.ts
+
+5. Create a CRUD Api for budget expenses
+the new API routes should be:
+-  POST /api/projects/[id]/budgets/[budget_id]/expenses/route.ts
+-  GET /api/projects/[id]/budgets/[budget_id]/expenses/route.ts
+-  PUT /api/projects/[id]/budgets/[budget_id]/expenses/[expense_id]/route.ts
+-  DELETE /api/projects/[id]/budgets/[budget_id]/expenses/[expense_id]/route.ts

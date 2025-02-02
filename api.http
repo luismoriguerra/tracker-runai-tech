@@ -1,0 +1,136 @@
+
+
+@token=appSession=
+###
+Get http://localhost:3000/api/health
+Cookie: {{token}}
+###
+Get http://localhost:3000/api/private
+Cookie: {{token}}
+
+###
+Get http://localhost:3000/api/settings
+Cookie: {{token}}
+
+
+###
+POST http://localhost:3000/api/settings
+Cookie: {{token}}
+
+{
+    "key": "test",
+    "value": "test"
+}
+
+###
+@keyId=2ae12195-a2cf-4563-ad27-9cc37c90a012
+
+Put http://localhost:3000/api/settings/{{keyId}}
+Cookie: {{token}}
+
+{
+    "key": "test2",
+    "value": "test2"
+}
+
+###
+Delete http://localhost:3000/api/settings/{{keyId}}
+Cookie: {{token}}
+
+###
+@projectId=tP5HaQuXoE7RXFw1g6tsK
+
+### Get Project Budgets
+Get http://localhost:3000/api/projects/{{projectId}}/budgets
+Cookie: {{token}}
+
+###
+Post http://localhost:3000/api/projects/{{projectId}}/budgets
+Cookie: {{token}}
+
+{
+    "name": "test",
+    "description": "test",
+    "estimated_amount": 1000
+}
+
+###
+@budget_id=vlSRg2l5x2x5F-AGHJ03N
+
+Put http://localhost:3000/api/projects/{{projectId}}/budgets/{{budget_id}}
+Cookie: {{token}}
+
+{
+    "name": "test2",
+    "description": "test2",
+    "estimated_amount": 2000
+}
+
+###
+Delete http://localhost:3000/api/projects/{{projectId}}/budgets/{{budget_id}}
+Cookie: {{token}}
+
+### Get Budget details
+
+Get http://localhost:3000/api/projects/{{projectId}}/budgets/{{budget_id}}
+Cookie: {{token}}
+
+
+### Get Budget Expenses
+Get http://localhost:3000/api/projects/{{projectId}}/budgets/{{budget_id}}/expenses
+Cookie: {{token}}
+
+###
+Post http://localhost:3000/api/projects/{{projectId}}/budgets/{{budget_id}}/expenses
+Cookie: {{token}}
+
+{
+    "name": "test a",
+    "description": "test a",
+    "amount": 5000,
+    "expense_date": "2024-12-24"
+}
+
+### 
+@expenseId=689a0ce6-b498-485e-b900-a235e07270f5
+
+### 
+Put http://localhost:3000/api/projects/{{projectId}}/budgets/{{budgetId}}/expenses/{{expenseId}}
+Cookie: {{token}}
+
+{
+    "name": "test4",
+    "description": "test4",
+    "amount": 4000,
+    "expense_date": "2024-11-24"
+}
+
+###
+Delete http://localhost:3000/api/projects/{{projectId}}/budgets/{{budgetId}}/expenses/{{expenseId}}
+Cookie: {{token}}
+
+
+
+@projectId=tP5HaQuXoE7RXFw1g6tsK
+
+###
+Get http://localhost:3000/api/projects/{{projectId}}/budgets-expenses
+Cookie: {{token}}
+
+###
+Get http://localhost:3000/api/projects/{{projectId}}/budgets-expenses
+
+Cookie: {{token}}
+
+###
+Get http://localhost:3000/api/projects/{{projectId}}/budgets-expenses?startDate=2024-01-01&endDate=2025-03-31
+Cookie: {{token}}
+
+###
+Get http://localhost:3000/api/projects/{{projectId}}/budgets
+Cookie: {{token}}
+
+###
+###
+###
+###

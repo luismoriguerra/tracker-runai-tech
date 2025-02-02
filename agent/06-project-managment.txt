@@ -1,0 +1,53 @@
+1. Create a new d1 migration to add a new table projects
+```
+npx wrangler d1 migrations create remodeling-tracker-db create_projects_table
+```
+
+2. Add the table schema to the migration file
+file: migrations/0002_create_projects_table.sql
+```
+CREATE TABLE projects (
+    id TEXT PRIMARY KEY,
+    user_id TEXT NOT NULL,
+    name TEXT NOT NULL,
+    description TEXT NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+```
+
+3. Apply the migration locally
+```
+npx wrangler d1 migrations apply remodeling-tracker-db --local
+```
+
+4. Create a Projects service file to handle projects CRUD
+file: server/domain/projects.ts 
+info: use server/services/d1.ts to get the d1 database
+
+
+5. Create CRUD api for projects
+- GET /api/projects
+- POST /api/projects
+- PUT /api/projects/:id
+- DELETE /api/projects/:id
+
+info: for getting user_id use 
+```
+import { getSession } from '@auth0/nextjs-auth0/edge';
+
+  const session = await getSession();
+  const userId = session?.user.sub;
+```
+
+4. Create a new Nexjs App routing page for projects CRUD
+The pages are:
+- projects/page.tsx
+- projects/new/page.tsx
+- projects/[id]/page.tsx
+- projects/[id]/edit/page.tsx
+
+INFO: add dark mode styles to all pages, for project list use shadcn card components focus on modern UX and modern design, use more shadcn components like alert-dialog
+
+

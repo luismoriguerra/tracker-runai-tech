@@ -1,0 +1,11 @@
+The next items are must in the codebase:
+- Use shadcn for ui with cli npx shadcn@latest add 
+- Use tailwind for styling
+- use nextjs for app routing
+- use auth0 for authentication and edge runtime for api routes
+- use d1 for database
+- Keep components short and simple, create new components when needed
+Examples are 
+service: server/domain/project_payments.ts
+api: app/api/projects/[id]/expenses/route.ts
+page: app/projects/[id]/expenses/page.tsx

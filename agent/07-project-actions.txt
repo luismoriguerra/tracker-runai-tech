@@ -1,0 +1,49 @@
+Add Project Data - Schedule Payments 
+
+1. Create a d1 migration to add the project_id to the payments table
+```
+npx wrangler d1 migrations create remodeling-tracker-db add_project_id_to_payments --local
+```
+
+2. Write project_payments table migration
+```
+DROP TABLE IF EXISTS project_payments;
+CREATE TABLE project_payments (
+    id TEXT PRIMARY KEY,
+    user_id TEXT NOT NULL,
+    project_id TEXT NOT NULL,
+    payment_date DATE NOT NULL,
+    amount DECIMAL(10, 2) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+)
+```
+
+3. Apply the migration
+```
+npx wrangler d1 migrations apply project_payments --local
+```
+
+4. Create a ProjectPayments service file to handle project payments CRUD
+file: server/domain/project_payments.ts 
+info: use server/services/d1.ts to get the d1 database
+
+5. Create CRUD api for project payments
+- GET /api/projects/:id/payments
+- POST /api/projects/:id/payments
+- PUT /api/projects/:id/payments/:id
+- DELETE /api/projects/:id/payments/:id
+
+info: for getting user_id use 
+```
+import { getSession } from '@auth0/nextjs-auth0/edge';
+
+  const session = await getSession();
+  const userId = session?.user.sub;
+```
+
+6. Create a new Nexjs App routing page for project payments CRUD
+
+Create one projects/[id]/payments/page.tsx 
+INFO: Project's Payments Page show a list of payments as a stack list, it allow to edit inline and provide an icon at the end of the list item to delete the payment by confirmation dialog.
+Also provide a button to add a new payment. it adds a new payment as new row where you can set name , description , amount , payment_date and save it. only use tailwind css , shadcn ui , zod 

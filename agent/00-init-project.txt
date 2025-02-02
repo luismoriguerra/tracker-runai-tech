@@ -1,0 +1,8 @@
+(1) Let's start with 
+
+npx shadcn@latest init -d -y
+
+
+(2) Go to the project folder
+
+cd <project-name>

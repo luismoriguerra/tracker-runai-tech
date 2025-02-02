@@ -1,0 +1,7 @@
+We are going to alter payments table to add status . a payment will have 2 statuses: pending, paid, by default it will be pending
+
+1. Create a new d1 migration to add the status column to the payments table
+
+2. Update app/api/projects/[id]/payments/route.ts to handle the new status column on Put Method
+
+3. Update Page projects/[id]/payments/page.tsx to handle the new status column on Put Method, show a shadcn checkbox at the end of the list item to mark as paid. when a user click on the checkbox it will update the status to paid. it works as a toggle.
