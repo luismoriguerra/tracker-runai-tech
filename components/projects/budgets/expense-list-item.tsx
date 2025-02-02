@@ -10,6 +10,7 @@ interface ExpenseListItemProps {
     onUpdate: (id: string, expense: Expense, file?: File) => Promise<void>;
     onDelete: (id: string) => void;
     onStatusChange: (id: string, checked: boolean) => Promise<void>;
+    isUpdating?: boolean;
 }
 
 const expenseSchema = z.object({
@@ -19,7 +20,7 @@ const expenseSchema = z.object({
     amount: z.number().positive(),
 });
 
-export function ExpenseListItem({ expense, onUpdate, onDelete, onStatusChange }: ExpenseListItemProps) {
+export function ExpenseListItem({ expense, onUpdate, onDelete, onStatusChange, isUpdating }: ExpenseListItemProps) {
     const { toast } = useToast();
     const [isEditing, setIsEditing] = useState(false);
     const [editExpense, setEditExpense] = useState<Expense | null>(null);
@@ -71,6 +72,7 @@ export function ExpenseListItem({ expense, onUpdate, onDelete, onStatusChange }:
             }}
             onDelete={onDelete}
             onStatusChange={onStatusChange}
+            isUpdating={isUpdating}
         />
     );
 } 

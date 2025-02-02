@@ -34,9 +34,10 @@ interface ExpenseViewProps {
     onEdit: () => void;
     onDelete: (id: string) => void;
     onStatusChange: (id: string, checked: boolean) => Promise<void>;
+    isUpdating?: boolean;
 }
 
-export function ExpenseView({ expense, onEdit, onDelete, onStatusChange }: ExpenseViewProps) {
+export function ExpenseView({ expense, onEdit, onDelete, onStatusChange, isUpdating }: ExpenseViewProps) {
     const [isStatusLoading, setIsStatusLoading] = useState(false);
     const { toast } = useToast();
 
@@ -114,13 +115,17 @@ export function ExpenseView({ expense, onEdit, onDelete, onStatusChange }: Expen
                                 </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="end">
-                                <DropdownMenuItem onClick={onEdit}>
+                                <DropdownMenuItem 
+                                    onClick={onEdit}
+                                    disabled={isUpdating}
+                                >
                                     <Pencil className="h-4 w-4 mr-2" />
-                                    Edit
+                                    {isUpdating ? 'Updating...' : 'Edit'}
                                 </DropdownMenuItem>
                                 <DropdownMenuItem 
                                     onClick={() => onDelete(expense.id)}
                                     className="text-red-600"
+                                    disabled={isUpdating}
                                 >
                                     <Trash2 className="h-4 w-4 mr-2" />
                                     Delete

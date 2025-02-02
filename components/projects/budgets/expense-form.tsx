@@ -58,7 +58,7 @@ export function ExpenseForm({ expense, onSave, onCancel, editExpense, setEditExp
         <Card>
             <CardContent className="flex-1 space-y-4 p-4">
                 <Input
-                    value={editExpense?.name || expense.name}
+                    value={editExpense?.name}
                     onChange={(e) =>
                         setEditExpense({
                             ...expense,
@@ -68,7 +68,7 @@ export function ExpenseForm({ expense, onSave, onCancel, editExpense, setEditExp
                     placeholder="Name"
                 />
                 <Textarea
-                    value={editExpense?.description || expense.description}
+                    value={editExpense?.description}
                     onChange={(e) =>
                         setEditExpense({
                             ...expense,

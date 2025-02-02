@@ -18,6 +18,7 @@ export default function BudgetExpensesPage() {
     const [expenses, setExpenses] = useState<Expense[]>([]);
     const [isAddingNew, setIsAddingNew] = useState(false);
     const [deleteId, setDeleteId] = useState<string | null>(null);
+    const [updatingExpenseId, setUpdatingExpenseId] = useState<string | null>(null);
     const [budget, setBudget] = useState<{ name: string, estimated_amount: number, description: string } | null>(null);
     const { toast } = useToast();
 
@@ -101,6 +102,7 @@ export default function BudgetExpensesPage() {
     };
 
     const handleUpdateExpense = async (expenseId: string, expense: Expense, file?: File) => {
+        setUpdatingExpenseId(expenseId);
         try {
             const updatedExpense = { ...expense };
 
@@ -150,6 +152,8 @@ export default function BudgetExpensesPage() {
                 description: "Failed to update expense",
                 variant: "destructive",
             });
+        } finally {
+            setUpdatingExpenseId(null);
         }
     };
 
@@ -246,6 +250,7 @@ export default function BudgetExpensesPage() {
                         onUpdate={handleUpdateExpense}
                         onDelete={(id) => setDeleteId(id)}
                         onStatusChange={handleStatusChange}
+                        isUpdating={updatingExpenseId === expense.id}
                     />
                 ))}
             </div>

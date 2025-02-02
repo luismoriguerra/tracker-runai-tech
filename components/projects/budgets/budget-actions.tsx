@@ -7,6 +7,7 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import Link from 'next/link';
 
 interface BudgetActionsProps {
     projectId: string;
@@ -22,6 +23,11 @@ export function BudgetActions({ projectId, budgetId }: BudgetActionsProps) {
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
+                <DropdownMenuItem asChild>
+                    <Link href={`/projects/${projectId}/budgets/${budgetId}/edit`} className="w-full">
+                        Edit Budget
+                    </Link>
+                </DropdownMenuItem>
                 <DropdownMenuItem>
                     <DeleteBudgetButton projectId={projectId} budgetId={budgetId} />
                 </DropdownMenuItem>
