@@ -7,10 +7,15 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-import { format } from "date-fns";
+import { format, parseISO } from "date-fns";
 import { Expense } from "./types";
 import Image from "next/image";
 import { ImageService } from "@/services/image-service";
+import {
+    Dialog,
+    DialogContent,
+    DialogTrigger,
+} from "@/components/ui/dialog";
 
 interface ExpenseTableProps {
     expenses: Expense[];
@@ -38,15 +43,30 @@ export function ExpenseTable({ expenses }: ExpenseTableProps) {
                         <TableRow key={expense.id}>
                             <TableCell>
                                 {expense.file_path ? (
-                                    <div className="relative h-12 w-12 overflow-hidden rounded-md">
-                                        <Image
-                                            src={ImageService.getImageUrl(expense.file_path)}
-                                            alt={`Receipt for ${expense.name}`}
-                                            fill
-                                            className="object-cover"
-                                            sizes="48px"
-                                        />
-                                    </div>
+                                    <Dialog>
+                                        <DialogTrigger asChild>
+                                            <div className="relative h-12 w-12 overflow-hidden rounded-md cursor-pointer hover:opacity-80 transition-opacity">
+                                                <Image
+                                                    src={ImageService.getImageUrl(expense.file_path)}
+                                                    alt={`Receipt for ${expense.name}`}
+                                                    fill
+                                                    className="object-cover"
+                                                    sizes="48px"
+                                                />
+                                            </div>
+                                        </DialogTrigger>
+                                        <DialogContent className="max-w-2xl">
+                                            <div className="relative w-full aspect-[4/3]">
+                                                <Image
+                                                    src={ImageService.getImageUrl(expense.file_path)}
+                                                    alt={`Receipt for ${expense.name} - Full View`}
+                                                    className="object-contain"
+                                                    fill
+                                                    sizes="(max-width: 768px) 100vw, 800px"
+                                                />
+                                            </div>
+                                        </DialogContent>
+                                    </Dialog>
                                 ) : (
                                     <div className="h-12 w-12 rounded-md bg-muted flex items-center justify-center">
                                         <span className="text-xs text-muted-foreground">No receipt</span>
@@ -57,7 +77,7 @@ export function ExpenseTable({ expenses }: ExpenseTableProps) {
                             <TableCell>{expense.description}</TableCell>
                             <TableCell>{expense.budget.name}</TableCell>
                             <TableCell className="capitalize">{expense.status}</TableCell>
-                            <TableCell>{format(new Date(expense.expense_date), 'MMM dd, yyyy')}</TableCell>
+                            <TableCell>{format(parseISO(expense.expense_date), 'MMM dd, yyyy')}</TableCell>
                             <TableCell className="text-right">${expense.amount.toFixed(2)}</TableCell>
                         </TableRow>
                     ))}
