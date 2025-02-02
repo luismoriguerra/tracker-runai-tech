@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import { SetBreadcrumb } from '@/components/set-breadcrumb';
+import { Button } from '@/components/ui/button';
+import { Pencil } from 'lucide-react';
 
 interface ProjectHeaderProps {
   projectId: string;
@@ -22,9 +24,17 @@ export function ProjectHeader({ projectId, projectName, projectDescription }: Pr
         ← Back to Projects
       </Link>
 
-      <h1 className="text-2xl font-bold mt-4 mb-2">
-        {projectName}
-      </h1>
+      <div className="flex items-center justify-between mt-4 mb-2">
+        <h1 className="text-2xl font-bold">
+          {projectName}
+        </h1>
+        <Button variant="outline" size="sm" asChild>
+          <Link href={`/projects/${projectId}/edit`}>
+            <Pencil className="h-4 w-4 mr-2" />
+            Edit Project
+          </Link>
+        </Button>
+      </div>
       <p className="text-gray-600 dark:text-gray-400 mb-8">
         {projectDescription}
       </p>
