@@ -1,36 +1,119 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Expenses Remodeling Project
 
-## Getting Started
+A modern web application for managing remodeling project expenses, built with Next.js and deployed on Cloudflare Pages.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- 🔐 Secure authentication with Auth0
+- 💾 Data persistence with Cloudflare D1 (SQLite)
+- 🎨 Modern UI with shadcn/ui components
+- 🌓 Dark/Light mode support
+- 📱 Responsive design with Tailwind CSS
+- ⚡ Edge runtime for optimal performance
+- 💰 Project budget management
+- 💳 Payment tracking
+- 📊 Expense management
+
+## Tech Stack
+
+- **Framework**: Next.js (App Router)
+- **Authentication**: Auth0
+- **Database**: Cloudflare D1 (SQLite)
+- **UI Components**: shadcn/ui
+- **Styling**: Tailwind CSS
+- **Deployment**: Cloudflare Pages
+- **Runtime**: Edge
+- **ID Generation**: nanoid
+
+## Prerequisites
+
+- Node.js 18+ 
+- Wrangler CLI
+- Cloudflare account
+- Auth0 account
+
+## Environment Setup
+
+1. Clone the repository
+2. Copy `.env.example` to `.env.local` and fill in the required values:
+   ```
+   AUTH0_SECRET=
+   AUTH0_BASE_URL=
+   AUTH0_ISSUER_BASE_URL=
+   AUTH0_CLIENT_ID=
+   AUTH0_CLIENT_SECRET=
+   ```
+
+## Development
+
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+2. Set up the database:
+   ```bash
+   # Create local D1 database
+   wrangler d1 create expenses-db
+   
+   # Apply migrations locally
+   wrangler d1 migrations apply expenses-db --local
+   ```
+
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
+
+4. Open [http://localhost:3000](http://localhost:3000) to view the application
+
+## Database Management
+
+- Create new migration:
+  ```bash
+  wrangler d1 migrations create [migration-name]
+  ```
+- Apply migrations locally:
+  ```bash
+  wrangler d1 migrations apply expenses-db --local
+  ```
+
+## Project Structure
+
+```
+├── app/                    # Next.js app directory
+│   ├── api/               # API routes (Edge runtime)
+│   ├── projects/          # Project management pages
+│   └── ...
+├── components/            # React components
+├── server/                # Server-side code
+│   └── domain/           # Domain services
+├── types/                # TypeScript type definitions
+└── tests/                # API tests
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## API Testing
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Use the provided `.http` files in the project root to test the API endpoints:
+```bash
+# Example using REST Client in VS Code
+api-db-test.http
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Deployment
 
-## Learn More
+The application is configured for deployment on Cloudflare Pages:
 
-To learn more about Next.js, take a look at the following resources:
+1. Push your changes to the main branch
+2. Cloudflare Pages will automatically build and deploy
+3. Ensure all environment variables are configured in Cloudflare Pages dashboard
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contributing
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Create a feature branch
+2. Make your changes
+3. Submit a pull request
 
-## Deploy on Vercel
+## License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
